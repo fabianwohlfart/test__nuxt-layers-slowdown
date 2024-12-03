@@ -1,0 +1,17 @@
+diff --git a/node_modules/tinyglobby/dist/index.mjs b/node_modules/tinyglobby/dist/index.mjs
+index 61c5643..b619d29 100644
+--- a/node_modules/tinyglobby/dist/index.mjs
++++ b/node_modules/tinyglobby/dist/index.mjs
+@@ -125,7 +125,11 @@ function crawl(options, cwd, sync) {
+   });
+   const fdirOptions = {
+     // use relative paths in the matcher
+-    filters: [(p, isDirectory) => matcher(processPath(p, cwd, properties.root, isDirectory, options.absolute))],
++    filters: [(p, isDirectory) => {
++      const path = processPath(p, cwd, properties.root, isDirectory, options.absolute)
++      console.log(path)
++      return matcher(path)
++    }],
+     exclude: (_, p) => exclude(processPath(p, cwd, properties.root, true, true)),
+     pathSeparator: "/",
+     relativePaths: true,
